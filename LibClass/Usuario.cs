@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace LibClass
+﻿namespace LibClass
 {
     public class Usuario
     {
