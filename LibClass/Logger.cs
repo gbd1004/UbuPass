@@ -1,10 +1,10 @@
 ﻿namespace LibClass
 {
-    public  class Log
+    public  class Logger
     {
         private List<string> logs;
 
-        public Log()
+        public Logger()
         {
             logs = new List<string>();
         }
