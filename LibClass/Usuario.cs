@@ -4,14 +4,14 @@ namespace LibClass
 {
     public class Usuario
     {
-        private int idUsuario;
+        private readonly int idUsuario;
         private string nombre;
-        private string rol;
-        private string contraseña_encriptada;
+        private bool esGestor;
+        private string contraseñaEncriptada;
 
-        public int IdUsuario { get => idUsuario; set => idUsuario = value; }
-        public string Nombre { get => nombre; set => nombre = value; }
-        public string Rol { get => rol; set => rol = value; }
-        public string Contraseña_encriptada { set => contraseña_encriptada = value; }
+        public int IdUsuario { get => idUsuario; }
+        public string Nombre { get => Nombre1; set => Nombre1 = value; }
+        public string Nombre1 { get => nombre; set => nombre = value; }
+        public string ContraseñaEncriptada { set => contraseñaEncriptada = value; }
     }
 }
