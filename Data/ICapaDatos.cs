@@ -11,6 +11,7 @@ namespace Data
     {
 
         // Métodos copiados de la pantalla del profesor
+        // Hay que hacer una clase que implemente esta interfaz
 
         int NumeroUsuarios();
 
