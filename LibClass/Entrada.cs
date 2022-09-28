@@ -21,5 +21,17 @@
 
         public string ContraseñaEncriptada { set => contraseñaEncriptada = value; }
         public List<Usuario> Usuarios { get => usuarios; }
+
+        public int numeroDeUsuariosConAcceso() {
+            return usuarios.Count;
+        }
+
+        public void anadirAccesoAUsuario(Usuario usuario) {
+            usuarios.Add(usuario);
+        }
+
+        public bool eleminarAccesoAUsuario(Usuario usuario) { 
+            return usuarios.Remove(usuario);
+        }
     }
 }
