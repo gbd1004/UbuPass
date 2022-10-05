@@ -39,13 +39,35 @@ namespace Data
         {
             foreach (Usuario usuario in usuarios) {
                 if (usuario.IdUsuario == idUsuario) {
+                    BorrarAcesosUsuario(usuario);
+                    // BORRAR ENTRADAS USUARIO
                     return usuarios.Remove(usuario);
                 }
             }
             return false;
         }
 
-        public bool BorraUsuario(string nombre)
+        private bool ExisteEntradaDeUsuario(Usuario usuario)
+        {
+            foreach(Entrada entrada in entradas)
+            {
+                if (entrada.Usuario == usuario)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void BorrarAcesosUsuario(Usuario usuario)
+        {
+            foreach(Entrada entrada in entradas)
+            {
+                entrada.eleminarAccesoAUsuario(usuario);
+            }
+        }
+
+        bool ICapaDatos.BorraUsuario(string nombre)
         {
             foreach (Usuario usuario in usuarios)
             {
