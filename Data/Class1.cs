@@ -67,7 +67,7 @@ namespace Data
             }
         }
 
-        bool ICapaDatos.BorraUsuario(string nombre)
+        public bool BorraUsuario(string nombre)
         {
             foreach (Usuario usuario in usuarios)
             {
@@ -90,7 +90,7 @@ namespace Data
             return null;
         }
 
-        Usuario getUsuario(int idUsuario)
+        public Usuario getUsuario(int idUsuario)
         {
             foreach (Usuario usuario in usuarios)
             {
