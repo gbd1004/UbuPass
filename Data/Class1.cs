@@ -98,10 +98,6 @@ namespace Data
             return usuarios.Count;
         }
 
-        public void anadirUsuario(Usuario usuario) {
-            usuarios.Add(usuario);
-        }
-
         bool ICapaDatos.anadirUsuario(string nombre, string email, bool esGestor, string contrasena)
         {
             if (!new EmailAddressAttribute().IsValid(email))
