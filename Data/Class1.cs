@@ -40,20 +40,8 @@ namespace Data
             foreach (Usuario usuario in usuarios) {
                 if (usuario.IdUsuario == idUsuario) {
                     BorrarAcesosUsuario(usuario);
-                    // BORRAR ENTRADAS USUARIO
+                    borrarEntradasDeUsuario(usuario);
                     return usuarios.Remove(usuario);
-                }
-            }
-            return false;
-        }
-
-        private bool ExisteEntradaDeUsuario(Usuario usuario)
-        {
-            foreach(Entrada entrada in entradas)
-            {
-                if (entrada.Usuario == usuario)
-                {
-                    return true;
                 }
             }
             return false;
