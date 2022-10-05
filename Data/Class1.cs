@@ -137,9 +137,6 @@ namespace Data
             }
             return false;
         }
-    }
-
-
 
         public Usuario getUsuarioEmail(string email)
         {
