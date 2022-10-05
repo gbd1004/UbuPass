@@ -1,6 +1,8 @@
 ﻿using LibClass;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Data
 {
@@ -99,5 +101,43 @@ namespace Data
         public void anadirUsuario(Usuario usuario) {
             usuarios.Add(usuario);
         }
+
+        bool ICapaDatos.anadirUsuario(string nombre, string email, bool esGestor, string contrasena)
+        {
+            if (!new EmailAddressAttribute().IsValid(email))
+                return false;
+            if (existeUsuario(email))
+                return false;
+            if (!Util.comprobarContrasena(contrasena))
+                return false;
+
+            usuarios.Add(new Usuario(usuarios.Count, nombre, email, esGestor, Util.Encriptar(contrasena)));
+            return true;
+        }
+
+        private bool existeUsuario(int idUsuario) {
+            foreach (Usuario usuario in usuarios)
+            {
+                if (usuario.IdUsuario == idUsuario)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool existeUsuario(string email)
+        {
+            foreach (Usuario usuario in usuarios)
+            {
+                if (usuario.Email == email)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
+
+
 }
