@@ -152,5 +152,15 @@ namespace Data
             }
             return null;
         }
+
+        bool ICapaDatos.anadirEntrada(int idUsuario, string contrasena)
+        {
+            if (!Util.comprobarContrasena(contrasena))
+                return false;
+            if (!existeUsuario(idUsuario))
+                return false;
+            entradas.Add(new Entrada(entradas.Count, getUsuario(idUsuario), Util.Encriptar(contrasena)));
+            return true;
+        }
     }
 }

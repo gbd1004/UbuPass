@@ -32,5 +32,7 @@ namespace Data
         bool borrarEntrada(int idEntrada);
 
         bool anadirUsuario(string nombre, string email, bool esGestor, string contrasena);
+
+        bool anadirEntrada(int idUsuario, string contrasena);
     }
 }
