@@ -24,5 +24,8 @@ namespace Data
 
         Usuario getUsuario(int idUsuario);
 
+        bool borrarEntradasDeUsuario(Usuario usuario);
+
+        bool borrarEntrada(int idEntrada);
     }
 }

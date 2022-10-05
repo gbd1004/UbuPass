@@ -9,7 +9,33 @@ namespace Data
         private List<Usuario> usuarios = new List<Usuario>();
         private List<Entrada> entradas = new List<Entrada>();
 
-        bool ICapaDatos.BorraUsuario(int idUsuario)
+        public bool borrarEntrada(int idEntrada)
+        {
+            foreach (Entrada entrada in entradas)
+            {
+                if (entrada.IdEntrada == idEntrada)
+                {
+                    return entradas.Remove(entrada);
+                }
+            }
+            return false;
+        }
+
+        public bool borrarEntradasDeUsuario(Usuario usuario)
+        {
+            bool hayEntradasEncontradas = false;
+            foreach (Entrada entrada in entradas)
+            {
+                if (entrada.Usuario == usuario)
+                {
+                    entradas.Remove(entrada);
+                    hayEntradasEncontradas = true;
+                }
+            }
+            return hayEntradasEncontradas;
+        }
+
+        public bool BorraUsuario(int idUsuario)
         {
             foreach (Usuario usuario in usuarios) {
                 if (usuario.IdUsuario == idUsuario) {
@@ -19,7 +45,7 @@ namespace Data
             return false;
         }
 
-        bool ICapaDatos.BorraUsuario(string nombre)
+        public bool BorraUsuario(string nombre)
         {
             foreach (Usuario usuario in usuarios)
             {
@@ -30,7 +56,7 @@ namespace Data
             return false;
         }
 
-        Usuario ICapaDatos.getUsuario(string nombre)
+        public Usuario getUsuario(string nombre)
         {
             foreach (Usuario usuario in usuarios)
             {
@@ -42,7 +68,7 @@ namespace Data
             return null;
         }
 
-        Usuario ICapaDatos.getUsuario(int idUsuario)
+        Usuario getUsuario(int idUsuario)
         {
             foreach (Usuario usuario in usuarios)
             {
@@ -54,7 +80,7 @@ namespace Data
             return null;
         }
 
-        int ICapaDatos.NumeroUsuarios()
+        public int NumeroUsuarios()
         {
             return usuarios.Count;
         }
