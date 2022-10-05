@@ -1,5 +1,6 @@
 ﻿using LibClass;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Data
 {
@@ -93,6 +94,10 @@ namespace Data
         public int NumeroUsuarios()
         {
             return usuarios.Count;
+        }
+
+        public void anadirUsuario(Usuario usuario) {
+            usuarios.Add(usuario);
         }
     }
 }

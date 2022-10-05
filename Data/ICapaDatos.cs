@@ -27,5 +27,7 @@ namespace Data
         bool borrarEntradasDeUsuario(Usuario usuario);
 
         bool borrarEntrada(int idEntrada);
+
+        void anadirUsuario(Usuario usuario);
     }
 }
