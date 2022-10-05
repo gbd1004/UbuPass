@@ -99,5 +99,17 @@ namespace Data
         public void anadirUsuario(Usuario usuario) {
             usuarios.Add(usuario);
         }
+
+        public Usuario getUsuarioEmail(string email)
+        {
+            foreach (Usuario usuario in usuarios)
+            {
+                if (usuario.Email == email)
+                {
+                    return usuario;
+                }
+            }
+            return null;
+        }
     }
 }
