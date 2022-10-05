@@ -6,11 +6,18 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Data
 {
-    public class Class1 : ICapaDatos
+    public class DBPruebas : ICapaDatos
     {
+
 
         private List<Usuario> usuarios = new List<Usuario>();
         private List<Entrada> entradas = new List<Entrada>();
+
+        public DBPruebas()
+        {
+            this.anadirUsuario("Pepe", "pepe@gmail.com", false, "1234");
+            this.anadirUsuario("Paco", "paco@gmail.com", true, "5678");
+        }
 
         public bool borrarEntrada(int idEntrada)
         {
@@ -98,7 +105,7 @@ namespace Data
             return usuarios.Count;
         }
 
-        bool ICapaDatos.anadirUsuario(string nombre, string email, bool esGestor, string contrasena)
+        public bool anadirUsuario(string nombre, string email, bool esGestor, string contrasena)
         {
             if (!new EmailAddressAttribute().IsValid(email))
                 return false;
