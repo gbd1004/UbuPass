@@ -50,10 +50,22 @@ namespace LibClass.Tests
             Assert.AreEqual("<" + DateTime.Now.ToString() + "> El usuario " + "1234" + " ha intentado acceder a la entrada " + "4321" + ". Permiso denegado.\n", l.obtenerLista());
         }
 
-        //[TestMethod()]
-        //public void obtenerListaTest()
-        //{
-        //    Assert.Fail();
-        //}
+        [TestMethod()]
+        public void obtenerListaTest()
+        {
+            Logger l = new Logger();
+            l.addLogUsuario(11111);
+            l.addLogEntradaNueva(1234, 4321);
+            l.addLogEntradaAccesoCorrecto(1234, 4321);
+            l.addLogEntradaAccesoInorrecto(1234, 4321);
+
+            string lista = "";
+            lista += "<" + DateTime.Now.ToString() + "> El usuario " + "11111" + " inició sesión.\n";
+            lista += "<" + DateTime.Now.ToString() + "> El usuario " + "1234" + " ha creado la entrada " + "4321" + ".\n";
+            lista += "<" + DateTime.Now.ToString() + "> El usuario " + "1234" + " ha accedido a la entrada " + "4321" + ".\n";
+            lista += "<" + DateTime.Now.ToString() + "> El usuario " + "1234" + " ha intentado acceder a la entrada " + "4321" + ". Permiso denegado.\n";
+
+            Assert.AreEqual(lista, l.obtenerLista());
+        }
     }
 }
