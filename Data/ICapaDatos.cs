@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibClass;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.SymbolStore;
 using System.Linq;
@@ -15,8 +16,13 @@ namespace Data
 
         int NumeroUsuarios();
 
-        bool BorrauUsuario(string nombre);
+        bool BorraUsuario(string nombre);
 
         bool BorraUsuario(int idUsuario);
+
+        Usuario getUsuario(string nombre);
+
+        Usuario getUsuario(int idUsuario);
+
     }
 }
