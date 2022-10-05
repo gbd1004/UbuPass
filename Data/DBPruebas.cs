@@ -153,7 +153,7 @@ namespace Data
             return null;
         }
 
-        bool ICapaDatos.anadirEntrada(int idUsuario, string contrasena)
+        public bool anadirEntrada(int idUsuario, string contrasena)
         {
             if (!Util.comprobarContrasena(contrasena))
                 return false;
