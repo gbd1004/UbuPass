@@ -32,12 +32,14 @@ namespace LibClass.Tests
         {
 
             Entrada e = new Entrada(1, usuario, Util.Encriptar("1234"));
-            Usuario usuario1 = new Usuario(1, "usuario1", "pepe@email.com", false, Util.Encriptar("1234"));
-            Usuario usuario2 = new Usuario(2, "usuario2", "pepe@email.com", false, Util.Encriptar("1234"));
-            Usuario usuario3 = new Usuario(3, "usuario3", "pepe@email.com", false, Util.Encriptar("1234"));
+            Usuario usuario1 = new Usuario(1, "usuario1", "example@email.com", false, Util.Encriptar("1234"));
+            Usuario usuario2 = new Usuario(2, "usuario2", "example@email.com", false, Util.Encriptar("1234"));
+            Usuario usuario3 = new Usuario(3, "usuario3", "example@email.com", false, Util.Encriptar("1234"));
 
             e.anadirAccesoAUsuario(usuario1);
+            Assert.AreEqual(e.numeroDeUsuariosConAcceso(), 1);
             e.anadirAccesoAUsuario(usuario2);
+            Assert.AreEqual(e.numeroDeUsuariosConAcceso(), 2);
             e.anadirAccesoAUsuario(usuario3);
             Assert.AreEqual(e.numeroDeUsuariosConAcceso(), 3);
 
@@ -47,29 +49,35 @@ namespace LibClass.Tests
         public void anadirAccesoAUsuarioTest()
         {
             Entrada e = new Entrada(1, usuario, Util.Encriptar("1234"));
-            Usuario usuario1 = new Usuario(1, "usuario1", "pepe@email.com", false, Util.Encriptar("1234"));
-            Usuario usuario2 = new Usuario(2, "usuario2", "pepe@email.com", false, Util.Encriptar("1234"));
-            Usuario usuario3 = new Usuario(3, "usuario3", "pepe@email.com", false, Util.Encriptar("1234"));
+            Usuario usuario1 = new Usuario(1, "usuario1", "example@email.com", false, Util.Encriptar("1234"));
+            Usuario usuario2 = new Usuario(2, "usuario2", "example@email.com", false, Util.Encriptar("1234"));
+            Usuario usuario3 = new Usuario(3, "usuario3", "example@email.com", false, Util.Encriptar("1234"));
 
             e.anadirAccesoAUsuario(usuario1);
+            Assert.AreEqual(e.Usuarios.Count, 1);
             e.anadirAccesoAUsuario(usuario2);
+            Assert.AreEqual(e.Usuarios.Count, 2);
             e.anadirAccesoAUsuario(usuario3);
-            Assert.AreEqual(e.numeroDeUsuariosConAcceso(), 3);
+            Assert.AreEqual(e.Usuarios.Count, 3);
         }
 
         [TestMethod()]
         public void eleminarAccesoAUsuarioTest()
         {
             Entrada e = new Entrada(1, usuario, Util.Encriptar("1234"));
-            Usuario usuario1 = new Usuario(1, "usuario1", "pepe@email.com", false, Util.Encriptar("1234"));
-            Usuario usuario2 = new Usuario(2, "usuario2", "pepe@email.com", false, Util.Encriptar("1234"));
-            Usuario usuario3 = new Usuario(3, "usuario3", "pepe@email.com", false, Util.Encriptar("1234"));
+            Usuario usuario1 = new Usuario(1, "usuario1", "example@email.com", false, Util.Encriptar("1234"));
+            Usuario usuario2 = new Usuario(2, "usuario2", "example@email.com", false, Util.Encriptar("1234"));
+            Usuario usuario3 = new Usuario(3, "usuario3", "example@email.com", false, Util.Encriptar("1234"));
 
             e.anadirAccesoAUsuario(usuario1);
             e.anadirAccesoAUsuario(usuario2);
             e.anadirAccesoAUsuario(usuario3);
             e.eleminarAccesoAUsuario(usuario1);
             Assert.AreEqual(e.numeroDeUsuariosConAcceso(), 2);
+            e.eleminarAccesoAUsuario(usuario2);
+            Assert.AreEqual(e.numeroDeUsuariosConAcceso(), 1);
+            e.eleminarAccesoAUsuario(usuario3);
+            Assert.AreEqual(e.numeroDeUsuariosConAcceso(), 0);
         }
     }
 }
