@@ -19,6 +19,7 @@ namespace LibClass.Tests
             Entrada e = new Entrada(1, usuario, Util.Encriptar("1234"));
             Usuario usuario2 = new Usuario(2, "usuario1", "pepe@email.com", false, Util.Encriptar("1234"));
             Assert.IsNotNull(e);
+            Assert.IsNotNull(e.Usuarios);
             e.anadirAccesoAUsuario(usuario2);
             Assert.AreEqual(e.Usuarios[0], usuario2);
             e.ContraseñaEncriptada = Util.Encriptar("1234");
