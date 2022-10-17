@@ -20,7 +20,8 @@
         public int IdUsuario { get => idUsuario; }
         public string Nombre { get => Nombre1; set => Nombre1 = value; }
         public string Nombre1 { get => nombre; set => nombre = value; }
-        public string ContraseñaEncriptada { set => contraseñaEncriptada = value; }
+        public string ContraseñaEncriptada { get => contraseñaEncriptada; set => contraseñaEncriptada = value; }
         public string Email { get => email; set => email = value; }
+        public bool EsGestor { get => esGestor; set => esGestor = value; }
     }
 }
