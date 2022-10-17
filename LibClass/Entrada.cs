@@ -19,7 +19,7 @@
 
         public Usuario Usuario => usuario;
 
-        public string ContraseñaEncriptada { set => contraseñaEncriptada = value; }
+        public string ContraseñaEncriptada { set => contraseñaEncriptada = value; get => contraseñaEncriptada; }
         public List<Usuario> Usuarios { get => usuarios; }
 
         public int numeroDeUsuariosConAcceso() {
