@@ -8,18 +8,27 @@ namespace Data
 {
     public class DBPruebas : ICapaDatos
     {
-
-
+        private int ultimaIdEntrada = 0;
+        private int ultimaIdUsuario = 0;
         private List<Usuario> usuarios = new List<Usuario>();
         private List<Entrada> entradas = new List<Entrada>();
 
+        public List<Usuario> Usuarios { get => usuarios; }
+        public List<Entrada> Entradas { get => entradas; }
+
         public DBPruebas()
         {
-            this.anadirUsuario("Pepe", "pepe@gmail.com", false, "1234");
-            this.anadirUsuario("Paco", "paco@gmail.com", true, "5678");
+            int idPepe = this.AnadirUsuario("Pepe", "pepe@gmail.com", false, "1234");
+            int idPaco = this.AnadirUsuario("Paco", "paco@gmail.com", true, "5678");
+
+            int idEnt1Pepe = this.AnadirEntrada(idPepe, "abcd");
+            int idEnt2Pepe = this.AnadirEntrada(idPepe, "fghi");
+            int idEnt1Paco = this.AnadirEntrada(idPaco, "jklm");
+
+            GetEntrada(idEnt1Pepe).anadirAccesoAUsuario(GetUsuario(idPaco));
         }
 
-        public bool borrarEntrada(int idEntrada)
+        public bool BorrarEntrada(int idEntrada)
         {
             foreach (Entrada entrada in entradas)
             {
@@ -31,17 +40,18 @@ namespace Data
             return false;
         }
 
-        public bool borrarEntradasDeUsuario(Usuario usuario)
+        public bool BorrarEntradasDeUsuario(int idUsuario)
         {
+            List<Entrada> entradas_temp = new List<Entrada>();
             bool hayEntradasEncontradas = false;
             foreach (Entrada entrada in entradas)
             {
-                if (entrada.Usuario == usuario)
-                {
-                    entradas.Remove(entrada);
+                if (entrada.Usuario.IdUsuario != idUsuario)
+                    entradas_temp.Add(entrada);
+                else
                     hayEntradasEncontradas = true;
-                }
             }
+            this.entradas = entradas_temp;
             return hayEntradasEncontradas;
         }
 
@@ -50,7 +60,7 @@ namespace Data
             foreach (Usuario usuario in usuarios) {
                 if (usuario.IdUsuario == idUsuario) {
                     BorrarAcesosUsuario(usuario);
-                    borrarEntradasDeUsuario(usuario);
+                    BorrarEntradasDeUsuario(idUsuario);
                     return usuarios.Remove(usuario);
                 }
             }
@@ -70,13 +80,15 @@ namespace Data
             foreach (Usuario usuario in usuarios)
             {
                 if (usuario.Nombre == nombre){
+                    BorrarAcesosUsuario(usuario);
+                    BorrarEntradasDeUsuario(usuario.IdUsuario);
                     return usuarios.Remove(usuario);
                 }
             }
             return false;
         }
 
-        public Usuario getUsuario(string nombre)
+        public Usuario GetUsuario(string nombre)
         {
             foreach (Usuario usuario in usuarios)
             {
@@ -88,7 +100,7 @@ namespace Data
             return null;
         }
 
-        public Usuario getUsuario(int idUsuario)
+        public Usuario GetUsuario(int idUsuario)
         {
             foreach (Usuario usuario in usuarios)
             {
@@ -105,20 +117,27 @@ namespace Data
             return usuarios.Count;
         }
 
-        public bool anadirUsuario(string nombre, string email, bool esGestor, string contrasena)
+        public int NumeroEntradas()
         {
-            if (!new EmailAddressAttribute().IsValid(email))
-                return false;
-            if (existeUsuario(email))
-                return false;
-            if (!Util.comprobarContrasena(contrasena))
-                return false;
-
-            usuarios.Add(new Usuario(usuarios.Count, nombre, email, esGestor, Util.Encriptar(contrasena)));
-            return true;
+            return entradas.Count;
         }
 
-        private bool existeUsuario(int idUsuario) {
+        public int AnadirUsuario(string nombre, string email, bool esGestor, string contrasena)
+        {
+            int id = -1;
+            if (!new EmailAddressAttribute().IsValid(email))
+                return id;
+            if (ExisteUsuario(email))
+                return id;
+            if (!Util.comprobarContrasena(contrasena))
+                return id;
+
+            id = ultimaIdUsuario++;
+            usuarios.Add(new Usuario(id, nombre, email, esGestor, Util.Encriptar(contrasena)));
+            return id;
+        }
+
+        private bool ExisteUsuario(int idUsuario) {
             foreach (Usuario usuario in usuarios)
             {
                 if (usuario.IdUsuario == idUsuario)
@@ -129,7 +148,7 @@ namespace Data
             return false;
         }
 
-        private bool existeUsuario(string email)
+        private bool ExisteUsuario(string email)
         {
             foreach (Usuario usuario in usuarios)
             {
@@ -141,7 +160,7 @@ namespace Data
             return false;
         }
 
-        public Usuario getUsuarioEmail(string email)
+        public Usuario GetUsuarioEmail(string email)
         {
             foreach (Usuario usuario in usuarios)
             {
@@ -153,14 +172,30 @@ namespace Data
             return null;
         }
 
-        public bool anadirEntrada(int idUsuario, string contrasena)
+        public int AnadirEntrada(int idUsuario, string contrasena)
         {
+            int id = -1;
             if (!Util.comprobarContrasena(contrasena))
-                return false;
-            if (!existeUsuario(idUsuario))
-                return false;
-            entradas.Add(new Entrada(entradas.Count, getUsuario(idUsuario), Util.Encriptar(contrasena)));
-            return true;
+                return -1;
+            if (!ExisteUsuario(idUsuario))
+                return -1;
+
+            id = ultimaIdEntrada++;
+            entradas.Add(new Entrada(id, GetUsuario(idUsuario), Util.Encriptar(contrasena)));
+            return id;
+        }
+
+        public Entrada GetEntrada(int idEntrada)
+        {
+            foreach (Entrada entrada in entradas)
+            {
+                if (entrada.IdEntrada == idEntrada)
+                {
+                    return entrada;
+                }
+            }
+
+            return null;
         }
     }
 }

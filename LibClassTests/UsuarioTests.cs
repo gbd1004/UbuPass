@@ -11,6 +11,7 @@ namespace LibClass.Tests
     [TestClass()]
     public class UsuarioTests
     {
+        // Este método prueba tanto el constructor, como getters y setters de la clase Usuario
         [TestMethod()]
         public void UsuarioTest()
         {

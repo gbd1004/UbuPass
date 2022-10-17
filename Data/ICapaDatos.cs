@@ -16,23 +16,26 @@ namespace Data
 
         int NumeroUsuarios();
 
+        int NumeroEntradas();
+
         bool BorraUsuario(string nombre);
 
         bool BorraUsuario(int idUsuario);
 
-        Usuario getUsuario(string nombre);
+        Usuario GetUsuario(string nombre);
 
-        Usuario getUsuario(int idUsuario);
+        Usuario GetUsuario(int idUsuario);
 
-        Usuario getUsuarioEmail(string email);
+        Usuario GetUsuarioEmail(string email);
 
+        bool BorrarEntradasDeUsuario(int idUsuario);
 
-        bool borrarEntradasDeUsuario(Usuario usuario);
+        bool BorrarEntrada(int idEntrada);
 
-        bool borrarEntrada(int idEntrada);
+        int AnadirUsuario(string nombre, string email, bool esGestor, string contrasena);
 
-        bool anadirUsuario(string nombre, string email, bool esGestor, string contrasena);
+        int AnadirEntrada(int idUsuario, string contrasena);
 
-        bool anadirEntrada(int idUsuario, string contrasena);
+        Entrada GetEntrada(int idEntrada);
     }
 }
